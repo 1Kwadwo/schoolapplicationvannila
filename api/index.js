@@ -83,11 +83,29 @@ app.get('/api/dashboard/stats', async (req, res) => {
     }
 });
 
-// Serve static files from frontend directory
-app.use(express.static(path.join(__dirname, '../frontend')));
+// Serve static files with proper headers
+app.use('/css', express.static(path.join(__dirname, '../frontend/css'), {
+    setHeaders: (res, path) => {
+        res.setHeader('Accept-Ranges', 'bytes');
+        res.setHeader('Cache-Control', 'public, max-age=31536000');
+    }
+}));
+
+app.use('/js', express.static(path.join(__dirname, '../frontend/js'), {
+    setHeaders: (res, path) => {
+        res.setHeader('Accept-Ranges', 'bytes');
+        res.setHeader('Cache-Control', 'public, max-age=31536000');
+    }
+}));
 
 // Serve the main HTML file for all routes (SPA)
 app.get('*', (req, res) => {
+    // Set proper headers to prevent range request issues
+    res.setHeader('Accept-Ranges', 'none');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
