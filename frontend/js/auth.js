@@ -1,24 +1,17 @@
 // Authentication Module
 class Auth {
     constructor() {
-        this.isAuthenticated = false;
-        this.currentUser = null;
+        this.isAuthenticated = true; // Always authenticated
+        this.currentUser = { username: 'Admin' };
         this.init();
     }
 
     init() {
-        this.showLogin(); // Show login modal by default
-        this.checkAuthStatus();
+        this.showApp(); // Show app directly without login
         this.bindEvents();
     }
 
     bindEvents() {
-        // Login form submission
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.login();
-        });
-
         // Logout button
         document.getElementById('logoutBtn').addEventListener('click', (e) => {
             e.preventDefault();
@@ -35,93 +28,15 @@ class Auth {
         });
     }
 
-    async checkAuthStatus() {
-        try {
-            const response = await fetch('/api/auth/check', {
-                method: 'GET',
-                credentials: 'include'
-            });
-            const data = await response.json();
-
-            if (data.success && data.authenticated) {
-                this.isAuthenticated = true;
-                this.currentUser = data.user;
-                this.showApp();
-            } else {
-                this.showLogin();
-            }
-        } catch (error) {
-            console.error('Error checking auth status:', error);
-            this.showLogin();
-        }
-    }
-
-    async login() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        if (!username || !password) {
-            this.showMessage('Please enter both username and password', 'error');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({ username, password })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                this.isAuthenticated = true;
-                this.currentUser = data.user;
-                this.showApp();
-                this.showMessage('Login successful!', 'success');
-            } else {
-                this.showMessage(data.message || 'Login failed', 'error');
-            }
-        } catch (error) {
-            console.error('Login error:', error);
-            this.showMessage('An error occurred during login', 'error');
-        }
-    }
-
     async logout() {
-        try {
-            const response = await fetch('/api/auth/logout', {
-                method: 'POST',
-                credentials: 'include'
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                this.isAuthenticated = false;
-                this.currentUser = null;
-                this.showLogin();
-                this.showMessage('Logout successful!', 'success');
-            } else {
-                this.showMessage('Logout failed', 'error');
-            }
-        } catch (error) {
-            console.error('Logout error:', error);
-            this.showMessage('An error occurred during logout', 'error');
-        }
-    }
-
-    showLogin() {
-        document.getElementById('loginModal').classList.add('show');
-        document.getElementById('app').style.display = 'none';
-        document.getElementById('username').focus();
+        // Simple logout that just refreshes the page
+        this.isAuthenticated = false;
+        this.currentUser = null;
+        window.location.reload();
     }
 
     showApp() {
-        document.getElementById('loginModal').classList.remove('show');
+        // Show the main app directly
         document.getElementById('app').style.display = 'flex';
         
         // Update user display
@@ -207,10 +122,9 @@ class Auth {
         }, 5000);
     }
 
-    // Utility function to make authenticated API calls
+    // Utility function to make API calls
     async apiCall(url, options = {}) {
         const defaultOptions = {
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -221,15 +135,6 @@ class Auth {
         try {
             const response = await fetch(url, finalOptions);
             const data = await response.json();
-
-            if (response.status === 401) {
-                // Unauthorized - redirect to login
-                this.isAuthenticated = false;
-                this.currentUser = null;
-                this.showLogin();
-                throw new Error('Session expired. Please login again.');
-            }
-
             return data;
         } catch (error) {
             console.error('API call error:', error);
