@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System - Demo</title>
+    <link rel="stylesheet" href="frontend/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Application -->
+    <div id="app" class="app">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>School Management System</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+                </a>
+                <a href="#" class="nav-link" data-page="students">
+                    <i class="fas fa-users"></i> Students
+                </a>
+                <a href="#" class="nav-link" data-page="courses">
+                    <i class="fas fa-book"></i> Courses
+                </a>
+                <a href="#" class="nav-link" data-page="enrollments">
+                    <i class="fas fa-user-graduate"></i> Enrollments
+                </a>
+            </div>
+            <div class="nav-user">
+                <div class="user-dropdown">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Demo User (Admin)</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" onclick="showDemoMessage()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="page active">
+                <div class="page-header">
+                    <h1>Admin Dashboard</h1>
+                </div>
+
+                <!-- Demo Notice -->
+                <div class="message success" style="margin-bottom: 24px;">
+                    <strong>🎉 Demo Mode:</strong> This is a frontend demo of the School Management System. 
+                    The backend API is not available on GitHub Pages, but you can view the interface and design.
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Students</h3>
+                            <p>5</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Courses</h3>
+                            <p>8</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Enrollments</h3>
+                            <p>10</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Active Students</h3>
+                            <p>5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Enrollments -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2>Recent Enrollments</h2>
+                        <button class="btn btn-primary" onclick="showPage('enrollments')">
+                            VIEW ALL ENROLLMENTS
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>STUDENT</th>
+                                    <th>COURSE</th>
+                                    <th>ENROLLMENT DATE</th>
+                                    <th>ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div class="avatar">J</div>
+                                            <div>
+                                                <div style="font-weight: 500; color: #2c3e50;">John Doe</div>
+                                                <div style="font-size: 12px; color: #7f8c8d;">john@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="font-weight: 500; color: #2c3e50;">CS101</div>
+                                            <div style="font-size: 12px; color: #7f8c8d;">Introduction to Computer Science</div>
+                                        </div>
+                                    </td>
+                                    <td>Aug 28, 2025</td>
+                                    <td>
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div class="avatar">J</div>
+                                            <div>
+                                                <div style="font-weight: 500; color: #2c3e50;">Jane Smith</div>
+                                                <div style="font-size: 12px; color: #7f8c8d;">jane@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="font-weight: 500; color: #2c3e50;">MATH201</div>
+                                            <div style="font-size: 12px; color: #7f8c8d;">Calculus I</div>
+                                        </div>
+                                    </td>
+                                    <td>Aug 28, 2025</td>
+                                    <td>
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div class="avatar">M</div>
+                                            <div>
+                                                <div style="font-weight: 500; color: #2c3e50;">Mike Johnson</div>
+                                                <div style="font-size: 12px; color: #7f8c8d;">mike@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div style="font-weight: 500; color: #2c3e50;">PHYS101</div>
+                                            <div style="font-size: 12px; color: #7f8c8d;">Physics Fundamentals</div>
+                                        </div>
+                                    </td>
+                                    <td>Aug 28, 2025</td>
+                                    <td>
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">View</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="section">
+                    <h2>Quick Actions</h2>
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="showPage('students')">
+                            <i class="fas fa-plus"></i>
+                            Add New Student
+                        </button>
+                        <button class="action-btn" onclick="showPage('courses')">
+                            <i class="fas fa-plus"></i>
+                            Add New Course
+                        </button>
+                        <button class="action-btn" onclick="showPage('enrollments')">
+                            <i class="fas fa-plus"></i>
+                            Create Enrollment
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Students Page -->
+            <div id="studentsPage" class="page">
+                <div class="page-header">
+                    <h1>Students Management</h1>
+                    <button class="btn btn-primary" onclick="showDemoMessage()">
+                        <i class="fas fa-plus"></i> Add Student
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>AGE</th>
+                                <th>CLASS</th>
+                                <th>EMAIL</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar">J</div>
+                                        <div>
+                                            <div style="font-weight: 500; color: #2c3e50;">John Doe</div>
+                                            <div style="font-size: 12px; color: #7f8c8d;">john@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>20</td>
+                                <td>Computer Science</td>
+                                <td>john@example.com</td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">Edit</a>
+                                        <a href="#" class="action-link" style="color: #e74c3c;" onclick="showDemoMessage()">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar">J</div>
+                                        <div>
+                                            <div style="font-weight: 500; color: #2c3e50;">Jane Smith</div>
+                                            <div style="font-size: 12px; color: #7f8c8d;">jane@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>19</td>
+                                <td>Mathematics</td>
+                                <td>jane@example.com</td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">Edit</a>
+                                        <a href="#" class="action-link" style="color: #e74c3c;" onclick="showDemoMessage()">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Courses Page -->
+            <div id="coursesPage" class="page">
+                <div class="page-header">
+                    <h1>Courses Management</h1>
+                    <button class="btn btn-primary" onclick="showDemoMessage()">
+                        <i class="fas fa-plus"></i> Add Course
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>CODE</th>
+                                <th>TITLE</th>
+                                <th>CREDITS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <div style="font-weight: 600; color: #3498db;">CS101</div>
+                                </td>
+                                <td>Introduction to Computer Science</td>
+                                <td>
+                                    <span style="background-color: #e8f5e8; color: #27ae60; padding: 4px 8px; border-radius: 4px; font-weight: 500;">
+                                        3 credits
+                                    </span>
+                                </td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">Edit</a>
+                                        <a href="#" class="action-link" style="color: #e74c3c;" onclick="showDemoMessage()">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <div style="font-weight: 600; color: #3498db;">MATH201</div>
+                                </td>
+                                <td>Calculus I</td>
+                                <td>
+                                    <span style="background-color: #e8f5e8; color: #27ae60; padding: 4px 8px; border-radius: 4px; font-weight: 500;">
+                                        4 credits
+                                    </span>
+                                </td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">Edit</a>
+                                        <a href="#" class="action-link" style="color: #e74c3c;" onclick="showDemoMessage()">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Enrollments Page -->
+            <div id="enrollmentsPage" class="page">
+                <div class="page-header">
+                    <h1>Enrollments Management</h1>
+                    <button class="btn btn-primary" onclick="showDemoMessage()">
+                        <i class="fas fa-plus"></i> Add Enrollment
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>STUDENT</th>
+                                <th>COURSE</th>
+                                <th>ENROLLMENT DATE</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="avatar">J</div>
+                                        <div>
+                                            <div style="font-weight: 500; color: #2c3e50;">John Doe</div>
+                                            <div style="font-size: 12px; color: #7f8c8d;">john@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div style="font-weight: 600; color: #3498db;">CS101</div>
+                                        <div style="font-size: 12px; color: #7f8c8d;">Introduction to Computer Science</div>
+                                    </div>
+                                </td>
+                                <td>Aug 28, 2025</td>
+                                <td>
+                                    <div style="display: flex; gap: 8px;">
+                                        <a href="#" class="action-link" onclick="showDemoMessage()">Edit</a>
+                                        <a href="#" class="action-link" style="color: #e74c3c;" onclick="showDemoMessage()">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple demo functionality
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected page
+            const targetPage = document.getElementById(`${pageName}Page`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            // Add active class to nav link
+            const activeLink = document.querySelector(`[data-page="${pageName}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+
+        function showDemoMessage() {
+            alert('🎉 This is a demo! In the full application, this would perform the actual action.\n\nFor the complete functionality with backend API, please deploy to Render, Heroku, or similar platforms.');
+        }
+
+        // Bind navigation events
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                showPage(page);
+            });
+        });
+    </script>
+</body>
+</html>
