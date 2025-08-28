@@ -7,6 +7,7 @@ class Auth {
     }
 
     init() {
+        this.showLogin(); // Show login modal by default
         this.checkAuthStatus();
         this.bindEvents();
     }
@@ -114,13 +115,13 @@ class Auth {
     }
 
     showLogin() {
-        document.getElementById('loginModal').style.display = 'flex';
+        document.getElementById('loginModal').classList.add('show');
         document.getElementById('app').style.display = 'none';
         document.getElementById('username').focus();
     }
 
     showApp() {
-        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('loginModal').classList.remove('show');
         document.getElementById('app').style.display = 'flex';
         
         // Update user display
@@ -247,7 +248,7 @@ function showPage(pageName) {
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
-        modal.style.display = 'none';
+        modal.classList.remove('show');
     }
 }
 

@@ -91,7 +91,7 @@ class Students {
         document.getElementById('studentModalTitle').textContent = 'Add Student';
         document.getElementById('studentForm').reset();
         document.getElementById('studentId').value = '';
-        document.getElementById('studentModal').style.display = 'flex';
+        document.getElementById('studentModal').classList.add('show');
     }
 
     async editStudent(studentId) {
@@ -106,7 +106,7 @@ class Students {
                 document.getElementById('studentAge').value = student.age;
                 document.getElementById('studentClass').value = student.class;
                 document.getElementById('studentEmail').value = student.email || '';
-                document.getElementById('studentModal').style.display = 'flex';
+                document.getElementById('studentModal').classList.add('show');
             } else {
                 window.auth.showMessage('Failed to load student data', 'error');
             }
@@ -168,7 +168,7 @@ class Students {
             document.getElementById('deleteMessage').textContent = 
                 `Are you sure you want to delete student "${student.name}"? This action cannot be undone.`;
             document.getElementById('confirmDeleteBtn').setAttribute('data-student-id', studentId);
-            document.getElementById('deleteModal').style.display = 'flex';
+            document.getElementById('deleteModal').classList.add('show');
         }
     }
 

@@ -79,7 +79,7 @@ class Courses {
         document.getElementById('courseModalTitle').textContent = 'Add Course';
         document.getElementById('courseForm').reset();
         document.getElementById('courseId').value = '';
-        document.getElementById('courseModal').style.display = 'flex';
+        document.getElementById('courseModal').classList.add('show');
     }
 
     async editCourse(courseId) {
@@ -93,7 +93,7 @@ class Courses {
                 document.getElementById('courseCode').value = course.code;
                 document.getElementById('courseTitle').value = course.title;
                 document.getElementById('courseCredits').value = course.credits;
-                document.getElementById('courseModal').style.display = 'flex';
+                document.getElementById('courseModal').classList.add('show');
             } else {
                 window.auth.showMessage('Failed to load course data', 'error');
             }
@@ -154,7 +154,7 @@ class Courses {
             document.getElementById('deleteMessage').textContent = 
                 `Are you sure you want to delete course "${course.code} - ${course.title}"? This action cannot be undone.`;
             document.getElementById('confirmDeleteBtn').setAttribute('data-course-id', courseId);
-            document.getElementById('deleteModal').style.display = 'flex';
+            document.getElementById('deleteModal').classList.add('show');
         }
     }
 

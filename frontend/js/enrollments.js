@@ -116,7 +116,7 @@ class Enrollments {
                 document.getElementById('enrollmentModalTitle').textContent = 'Add Enrollment';
                 document.getElementById('enrollmentForm').reset();
                 document.getElementById('enrollmentId').value = '';
-                document.getElementById('enrollmentModal').style.display = 'flex';
+                document.getElementById('enrollmentModal').classList.add('show');
             } else {
                 window.auth.showMessage('Failed to load form data', 'error');
             }
@@ -165,7 +165,7 @@ class Enrollments {
                     document.getElementById('enrollmentId').value = enrollment.id;
                     document.getElementById('enrollmentStudent').value = enrollment.student_id;
                     document.getElementById('enrollmentCourse').value = enrollment.course_id;
-                    document.getElementById('enrollmentModal').style.display = 'flex';
+                    document.getElementById('enrollmentModal').classList.add('show');
                 } else {
                     window.auth.showMessage('Failed to load form data', 'error');
                 }
@@ -228,7 +228,7 @@ class Enrollments {
             document.getElementById('deleteMessage').textContent = 
                 `Are you sure you want to delete the enrollment for "${enrollment.student_name}" in "${enrollment.course_code}"? This action cannot be undone.`;
             document.getElementById('confirmDeleteBtn').setAttribute('data-enrollment-id', enrollmentId);
-            document.getElementById('deleteModal').style.display = 'flex';
+            document.getElementById('deleteModal').classList.add('show');
         }
     }
 
