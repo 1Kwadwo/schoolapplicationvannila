@@ -7,7 +7,7 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
     "init-db": "node backend/database/init-db.js",
-    "build": "echo 'Build completed'",
+    "build": "npm run init-db",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -39,10 +39,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/school-management-app.git"
+    "url": "https://github.com/1Kwadwo/schoolapplicationvannila.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/school-management-app/issues"
+    "url": "https://github.com/1Kwadwo/schoolapplicationvannila/issues"
   },
-  "homepage": "https://github.com/yourusername/school-management-app#readme"
+  "homepage": "https://github.com/1Kwadwo/schoolapplicationvannila#readme"
 }
