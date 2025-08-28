@@ -88,10 +88,16 @@ class Students {
     }
 
     showAddStudentModal() {
+        console.log('showAddStudentModal called');
+        const modal = document.getElementById('studentModal');
+        console.log('Modal element:', modal);
+        
         document.getElementById('studentModalTitle').textContent = 'Add Student';
         document.getElementById('studentForm').reset();
         document.getElementById('studentId').value = '';
-        document.getElementById('studentModal').classList.add('show');
+        
+        modal.classList.add('show');
+        console.log('Modal classes after adding show:', modal.classList.toString());
     }
 
     async editStudent(studentId) {
@@ -201,8 +207,12 @@ class Students {
 
 // Global functions for HTML onclick handlers
 function showAddStudentModal() {
+    console.log('Global showAddStudentModal called');
+    console.log('window.studentsModule:', window.studentsModule);
     if (window.studentsModule) {
         window.studentsModule.showAddStudentModal();
+    } else {
+        console.error('studentsModule not found!');
     }
 }
 
