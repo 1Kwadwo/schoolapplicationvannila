@@ -2,13 +2,13 @@ const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path');
+const serverless = require('serverless-http');
 
 // Import routes
-const authRoutes = require('../backend/routes/auth');
-const studentsRoutes = require('../backend/routes/students');
-const coursesRoutes = require('../backend/routes/courses');
-const enrollmentsRoutes = require('../backend/routes/enrollments');
+const authRoutes = require('../../backend/routes/auth');
+const studentsRoutes = require('../../backend/routes/students');
+const coursesRoutes = require('../../backend/routes/courses');
+const enrollmentsRoutes = require('../../backend/routes/enrollments');
 
 const app = express();
 
@@ -42,7 +42,7 @@ app.use('/api/enrollments', enrollmentsRoutes);
 // Dashboard statistics endpoint
 app.get('/api/dashboard/stats', async (req, res) => {
     try {
-        const { getAll } = require('../backend/database/db');
+        const { getAll } = require('../../backend/database/db');
         
         // Get counts
         const studentsCount = await getAll('SELECT COUNT(*) as count FROM students');
@@ -83,36 +83,6 @@ app.get('/api/dashboard/stats', async (req, res) => {
     }
 });
 
-// Serve static files with proper headers
-app.use('/css', express.static(path.join(__dirname, '../frontend/css'), {
-    setHeaders: (res, path) => {
-        res.setHeader('Accept-Ranges', 'bytes');
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
-    }
-}));
-
-app.use('/js', express.static(path.join(__dirname, '../frontend/js'), {
-    setHeaders: (res, path) => {
-        res.setHeader('Accept-Ranges', 'bytes');
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
-    }
-}));
-
-// Serve the main HTML file for all routes (SPA)
-app.get('*', (req, res) => {
-    // Set proper headers to prevent range request issues
-    res.setHeader('Accept-Ranges', 'none');
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Server error:', err);
@@ -122,5 +92,13 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Export for Vercel
-module.exports = app;
+// 404 handler
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found'
+    });
+});
+
+// Export for Netlify serverless functions
+module.exports.handler = serverless(app);
